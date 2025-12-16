@@ -189,7 +189,7 @@ g++ -std=c++11 -o maze main.cpp
     <td rowspan="4">DFS (Depth-First Search)<br>IDS (Iterative Deepening Search)<br>Hill Climbing</td>
   </tr>
   <tr>
-    <td>Muhamed Ahmed Abdelhadi</td>
+    <td>Muhamed Hamed Abdelhadi</td>
   </tr>
   <tr>
     <td>Ahmed Mahmoud Nagii</td>
