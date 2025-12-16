@@ -179,19 +179,39 @@ g++ -std=c++11 -o maze main.cpp
 
 ## Team Contributions
 
-| Team Member | Algorithms |
-|-------------|------------|
-| Hassan Rashed | DFS (Depth-First Search) |
-| Muhamed Ahmed Abdelhadi | IDS (Iterative Deepening Search) |
-| Ahmed Mahmoud Nagii | Hill Climbing |
-| Mohamed Khaled Nouh | |
-| Ammar Alaa Ibrahim | |
-| Mahmoud Khaled Elbrlosy | BFS (Breadth-First Search) |
-| Abdallah Mohamed Elkady | UCS (Uniform Cost Search) |
-| Mahmoud Ahmed Mostafa | A* Search |
+<table>
+  <tr>
+    <th>Team Member</th>
+    <th>Algorithms</th>
+  </tr>
+  <tr>
+    <td>Hassan Rashed</td>
+    <td rowspan="4">DFS (Depth-First Search)<br>IDS (Iterative Deepening Search)<br>Hill Climbing</td>
+  </tr>
+  <tr>
+    <td>Muhamed Ahmed Abdelhadi</td>
+  </tr>
+  <tr>
+    <td>Ahmed Mahmoud Nagii</td>
+  </tr>
+  <tr>
+    <td>Mohamed Khaled Nouh</td>
+  </tr>
+  <tr>
+    <td>Ammar Alaa Ibrahim</td>
+    <td rowspan="4">BFS (Breadth-First Search)<br>UCS (Uniform Cost Search)<br>A* Search</td>
+  </tr>
+  <tr>
+    <td>Mahmoud Khaled Elbrlosy</td>
+  </tr>
+  <tr>
+    <td>Abdallah Mohamed Elkady</td>
+  </tr>
+  <tr>
+    <td>Mahmoud Ahmed Mostafa</td>
+  </tr>
+</table>
 
 ---
 
-## License
 
-This project is developed for educational purposes as part of an AI course project.
