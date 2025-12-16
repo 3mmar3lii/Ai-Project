@@ -185,11 +185,11 @@ g++ -std=c++11 -o maze main.cpp
     <th>Algorithms</th>
   </tr>
   <tr>
-    <td>Hassan Ahmed Rashed</td>
+    <td>Hassan Hamed Rashed</td>
     <td rowspan="4">DFS (Depth-First Search)<br>IDS (Iterative Deepening Search)<br>Hill Climbing</td>
   </tr>
   <tr>
-    <td>Muhamed Hamed Abdelhadi</td>
+    <td>Muhamed Ahmed Abdelhadi</td>
   </tr>
   <tr>
     <td>Ahmed Mahmoud Nagii</td>
