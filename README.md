@@ -182,10 +182,10 @@ g++ -std=c++11 -o maze main.cpp
 | Team Member | Algorithms |
 |-------------|------------|
 | Hassan Rashed | DFS (Depth-First Search) |
-| Muhamed Ahmed Abdelhadi | DFS (Depth-First Search) |
-| Ahmed Mahmoud Nagii | IDS (Iterative Deepening Search) |
-| Mohamed Khaled Nouh | Hill Climbing |
-| Ammar Alaa Ibrahim | Hill Climbing |
+| Muhamed Ahmed Abdelhadi | IDS (Iterative Deepening Search) |
+| Ahmed Mahmoud Nagii | Hill Climbing |
+| Mohamed Khaled Nouh | |
+| Ammar Alaa Ibrahim | |
 | Mahmoud Khaled Elbrlosy | BFS (Breadth-First Search) |
 | Abdallah Mohamed Elkady | UCS (Uniform Cost Search) |
 | Mahmoud Ahmed Mostafa | A* Search |
