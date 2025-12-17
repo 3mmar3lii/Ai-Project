@@ -68,38 +68,16 @@ A* combines cost and heuristic to find the most efficient path.
 
 ## Team Contributions
 
-<table>
-  <tr>
-    <th>Team Member</th>
-    <th>Algorithms</th>
-  </tr>
-  <tr>
-    <td>Hassan Hamed Rashed</td>
-    <td rowspan="4">DFS (Depth-First Search)<br>IDS (Iterative Deepening Search)<br>Hill Climbing</td>
-  </tr>
-  <tr>
-    <td>Muhamed Ahmed Abdelhadi</td>
-  </tr>
-  <tr>
-    <td>Ahmed Mahmoud Nagii</td>
-  </tr>
-  <tr>
-    <td>Mohamed Khaled Nouh</td>
-  </tr>
-  <tr>
-    <td>Ammar Alaa Ibrahim</td>
-    <td rowspan="4">BFS (Breadth-First Search)<br>UCS (Uniform Cost Search)<br>A* Search</td>
-  </tr>
-  <tr>
-    <td>Mahmoud Khaled Elbrlosy</td>
-  </tr>
-  <tr>
-    <td>Abdallah Mohamed Elkady</td>
-  </tr>
-  <tr>
-    <td>Mahmoud Ahmed Mostafa</td>
-  </tr>
-</table>
+| Team Member | Algorithms |
+|-------------|------------|
+| Hassan Rashed | DFS, IDS, Hill Climbing |
+| Muhamed Ahmed Abdelhadi | DFS, IDS, Hill Climbing |
+| Ahmed Mahmoud Nagii | DFS, IDS, Hill Climbing |
+| Mohamed Khaled Nouh | DFS, IDS, Hill Climbing |
+| Ammar Alaa Ibrahim | BFS, UCS, A* |
+| Mahmoud Khaled Elbrlosy | BFS, UCS, A* |
+| Abdallah Mohamed Elkady | BFS, UCS, A* |
+| Mahmoud Ahmed Mostafa | BFS, UCS, A* |
 
 ---
 
