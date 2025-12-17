@@ -1,217 +1,89 @@
 # Maze Path Finding
 
-A C++ implementation of various pathfinding algorithms to solve maze navigation problems. The project demonstrates how different search strategies explore and find paths through grid-based mazes.
-
-## Problem Overview
-
-The maze is represented as a 2D grid where:
-- **Start Position**: Top-left corner `(0, 0)`
-- **Goal Position**: Bottom-right corner `(n-1, m-1)`
-- **Movement**: Only through valid, non-obstructed cells
-
-The objective is to determine whether a path exists and, if so, identify it using different algorithmic approaches.
+This project implements several algorithms to find a path through a maze.  
+The maze is represented as a grid of passable cells and obstacles.  
+The start is at the *top-left corner, and the goal is at the **bottom-right corner*.  
+Movement is allowed only through valid cells.  
+This project demonstrates the use of search and path-finding algorithms in practice.
 
 ---
 
-## Algorithms Implemented
+## Algorithms Used
 
-### Depth-First Search (DFS)
+### Depth-First Search (DFS)  
+DFS explores the maze by going as deep as possible along one path, then backtracking when a dead end is reached.  
+- Uses a stack or recursion  
+- Finds a path if one exists  
+- Not guaranteed to find the shortest path  
 
-Explores the maze by going as deep as possible before backtracking.
+### Iterative Deepening Search (IDS)  
+IDS combines DFS and BFS by performing DFS with increasing depth limits until the goal is found.  
+- Low memory usage  
+- Complete (guarantees a solution)  
+- Slower due to repeated searches  
 
-| Property | Description |
-|----------|-------------|
-| Data Structure | Stack / Recursion |
-| Complete | Yes (finds a path if one exists) |
-| Optimal | No (not guaranteed shortest path) |
-| Memory | Low |
-| Time Complexity | `O(n × m)` |
+### Hill Climbing  
+Hill Climbing is a greedy algorithm that moves toward the cell closest to the goal.  
+- Uses a heuristic function (distance to goal)  
+- Fast but may get stuck or fail  
+- Not guaranteed to find a path  
 
-**How it works**: Starts at top-left, moves to neighbors, continues until hitting a dead end, then backtracks to try different directions.
+### Breadth-First Search (BFS)  
+BFS explores all neighbors level by level.  
+- Uses a queue  
+- Complete and finds the shortest path if all moves cost the same  
+- Uses more memory than DFS  
 
----
+### Uniform Cost Search (UCS)  
+UCS finds the path with the lowest total cost.  
+- Uses a priority queue  
+- Complete and optimal  
+- Works with different movement costs  
 
-### Iterative Deepening Search (IDS)
-
-Combines the benefits of DFS (low memory) and BFS (completeness).
-
-| Property | Description |
-|----------|-------------|
-| Data Structure | Stack with depth limit |
-| Complete | Yes |
-| Optimal | Yes (in terms of depth) |
-| Memory | Low |
-| Time Complexity | `O(n × m × d)` |
-
-**How it works**: Performs DFS with increasing depth limits (0, 1, 2, ...) until the goal is found.
-
----
-
-### Hill Climbing
-
-A greedy algorithm that always moves toward the cell closest to the goal.
-
-| Property | Description |
-|----------|-------------|
-| Data Structure | Heuristic-based selection |
-| Complete | No (may get stuck) |
-| Optimal | No |
-| Memory | Very Low |
-| Time Complexity | `O(d)` |
-
-**How it works**: At each step, chooses the neighboring cell that minimizes distance to the goal. Can get stuck in local maxima.
+### A* Search  
+A* combines cost and heuristic to find the most efficient path.  
+- Uses f(n) = g(n) + h(n)  
+- Complete and optimal with a good heuristic  
+- Faster than UCS and BFS in practice  
 
 ---
 
-### Breadth-First Search (BFS)
+## Time Complexity Comparison
 
-Explores the maze level by level, checking all nearby cells first.
+| Algorithm | Time Complexity | Notes |
+|-----------|----------------|-------|
+| DFS | O(n × m) | Visits each cell once, may backtrack |
+| IDS | O(n × m × d) | Repeats DFS for increasing depths, d = max depth |
+| Hill Climbing | O(d) | Moves toward goal using heuristic, may fail |
+| BFS | O(n × m) | Explores all reachable cells level by level |
+| UCS | O((n × m) log(n × m)) | Uses priority queue based on path cost |
+| A* | O((n × m) log(n × m)) | Uses heuristic to guide search efficiently |
 
-| Property | Description |
-|----------|-------------|
-| Data Structure | Queue |
-| Complete | Yes |
-| Optimal | Yes (shortest path for equal costs) |
-| Memory | Higher than DFS |
-| Time Complexity | `O(n × m)` |
-
-**How it works**: Explores all neighbors at the current depth before moving to the next level.
-
----
-
-### Uniform Cost Search (UCS)
-
-Finds the path with the lowest total cost, not just the shortest number of steps.
-
-| Property | Description |
-|----------|-------------|
-| Data Structure | Priority Queue |
-| Complete | Yes |
-| Optimal | Yes (minimum cost path) |
-| Memory | Moderate |
-| Time Complexity | `O((n × m) × log(n × m))` |
-
-**How it works**: Expands nodes with the least cumulative cost first. Works with different movement costs.
-
----
-
-### A* Search
-
-An informed search algorithm that combines actual cost and heuristic estimation.
-
-| Property | Description |
-|----------|-------------|
-| Data Structure | Priority Queue |
-| Complete | Yes |
-| Optimal | Yes (with admissible heuristic) |
-| Memory | Moderate |
-| Time Complexity | `O((n × m) × log(n × m))` |
-
-**How it works**: Uses `f(n) = g(n) + h(n)` where:
-- `g(n)` = cost from start to current node
-- `h(n)` = estimated cost from current node to goal
-
----
-
-## Algorithm Comparison
-
-| Algorithm | Time Complexity | Complete | Optimal | Memory | Best For |
-|-----------|-----------------|----------|---------|--------|----------|
-| DFS | `O(n × m)` | Yes | No | Low | Simple exploration |
-| IDS | `O(n × m × d)` | Yes | Yes | Low | Memory-constrained |
-| Hill Climbing | `O(d)` | No | No | Very Low | Fast approximation |
-| BFS | `O(n × m)` | Yes | Yes | High | Shortest path (uniform cost) |
-| UCS | `O((n×m) log(n×m))` | Yes | Yes | Moderate | Weighted graphs |
-| A* | `O((n×m) log(n×m))` | Yes | Yes | Moderate | Best practical choice |
-
-**Notation**:
-- `n × m` = Grid dimensions (total cells)
-- `d` = Depth of solution (path length)
-
----
-
-## Project Structure
-
-```
-Ai-Project/
-├── main.cpp           # Main entry point with all algorithms
-├── dfs.cpp            # Depth-First Search implementation
-├── bfs.cpp            # Breadth-First Search implementation
-├── ids.cpp            # Iterative Deepening Search implementation
-├── ucs.cpp            # Uniform Cost Search implementation
-├── hill_climbing.cpp  # Hill Climbing implementation
-├── DOCUMENTATION.md   # Detailed documentation
-└── README.md          # This file
-```
-
----
-
-## Getting Started
-
-### Prerequisites
-
-- C++ Compiler (g++, clang++, or MSVC)
-- C++11 or later
-
-### Compilation
-
-```bash
-g++ -std=c++11 -o maze main.cpp
-```
-
-### Running
-
-```bash
-./maze
-```
-
----
-
-## Key Takeaways
-
-- **DFS and BFS** are fast for simple mazes
-- **IDS** trades time for low memory usage
-- **Hill Climbing** is fast but unreliable
-- **UCS and A*** guarantee optimal paths but are slower
-- **A*** is generally the best practical choice for real-world applications
+*Legend:*  
+- n → number of rows in the maze  
+- m → number of columns in the maze  
+- d → depth of the solution (path length)  
 
 ---
 
 ## Team Contributions
 
-<table>
-  <tr>
-    <th>Team Member</th>
-    <th>Algorithms</th>
-  </tr>
-  <tr>
-    <td>Hassan Rashed</td>
-    <td rowspan="4">DFS (Depth-First Search)<br>IDS (Iterative Deepening Search)<br>Hill Climbing</td>
-  </tr>
-  <tr>
-    <td>Muhamed Ahmed Abdelhadi</td>
-  </tr>
-  <tr>
-    <td>Ahmed Mahmoud Nagii</td>
-  </tr>
-  <tr>
-    <td>Mohamed Khaled Nouh</td>
-  </tr>
-  <tr>
-    <td>Ammar Alaa Ibrahim</td>
-    <td rowspan="4">BFS (Breadth-First Search)<br>UCS (Uniform Cost Search)<br>A* Search</td>
-  </tr>
-  <tr>
-    <td>Mahmoud Khaled Elbrlosy</td>
-  </tr>
-  <tr>
-    <td>Abdallah Mohamed Elkady</td>
-  </tr>
-  <tr>
-    <td>Mahmoud Ahmed Mostafa</td>
-  </tr>
-</table>
+| Team Member | Algorithms |
+|-------------|------------|
+| Hassan Rashed | DFS, IDS, Hill Climbing |
+| Muhamed Ahmed Abdelhadi | DFS, IDS, Hill Climbing |
+| Ahmed Mahmoud Nagii | DFS, IDS, Hill Climbing |
+| Mohamed Khaled Nouh | DFS, IDS, Hill Climbing |
+| Ammar Alaa Ibrahim | BFS, UCS, A* |
+| Mahmoud Khaled Elbrlosy | BFS, UCS, A* |
+| Abdallah Mohamed Elkady | BFS, UCS, A* |
+| Mahmoud Ahmed Mostafa | BFS, UCS, A* |
 
 ---
 
+## Implementation
 
+The source code, execution instructions, and example results are available in the [project repository](#).  
+Each algorithm can be run independently to find a path through any maze provided in the input format.
+
+---
