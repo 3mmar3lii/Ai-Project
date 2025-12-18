@@ -1,32 +1,38 @@
-#include <bits/stdc++.h>
+#include <iostream>
+#include <vector>
+#include <utility>
+#include <cmath>
+
 using namespace std;
 
-// =================================================================
-// DFS
-// =================================================================
-bool DFS(int row, int col, vector<vector<int>>& Maze,
-         vector<vector<bool>>& visited, vector<pair<int,int>>& path)
+// directions: down, up, right, left
+int dr[4] = { 1, -1, 0, 0 };
+int dc[4] = { 0, 0, 1, -1 };
+
+bool DFS(int r, int c,
+    vector<vector<int>>& maze,
+    vector<vector<bool>>& visited,
+    vector<pair<int, int>>& path,
+    int goalRow, int goalCol)
 {
-    int n = Maze.size();
-    int m = Maze[0].size();
+    int n = maze.size();
+    int m = maze[0].size();
 
-    if (row < 0 || col < 0 || row >= n || col >= m)
+    if (r < 0 || c < 0 || r >= n || c >= m)
         return false;
 
-    if (Maze[row][col] == 1 || visited[row][col])
+    if (maze[r][c] == 1 || visited[r][c])
         return false;
 
-    visited[row][col] = true;
-    path.push_back({row, col});
+    visited[r][c] = true;
+    path.push_back({ r,c });
 
-    if (row == n - 1 && col == m - 1)
+    if (r == goalRow && c == goalCol)
         return true;
 
-    static int dr[4] = {1, -1, 0, 0};
-    static int dc[4] = {0, 0, 1, -1};
-
-    for (int i = 0; i < 4; i++) {
-        if (DFS(row + dr[i], col + dc[i], Maze, visited, path))
+    for (int i = 0; i < 4; i++)
+    {
+        if (DFS(r + dr[i], c + dc[i], maze, visited, path, goalRow, goalCol))
             return true;
     }
 
@@ -34,43 +40,49 @@ bool DFS(int row, int col, vector<vector<int>>& Maze,
     return false;
 }
 
-// =================================================================
-// MAIN - Test DFS
-// =================================================================
-int main() {
-    cout << "=== DFS Test ===" << endl;
-    cout << "(0 means empty, 1 means wall)" << endl << endl;
+int main()
+{
+    int n, m;
+    cout << "Enter rows and columns: ";
+    cin >> n >> m;
 
-    // Test Maze
-    vector<vector<int>> Maze = {
-        {0, 0, 1, 0},
-        {1, 0, 0, 0},
-        {0, 0, 1, 0},
-        {0, 0, 0, 0}
-    };
-
-    int n = Maze.size(), m = Maze[0].size();
-
-    cout << "Maze:" << endl;
+    vector<vector<int>> maze(n, vector<int>(m));
+    cout << "Enter maze:\n";
     for (int i = 0; i < n; i++) {
         for (int j = 0; j < m; j++)
-            cout << Maze[i][j] << " ";
-        cout << endl;
+            cin >> maze[i][j];
+    }
+
+
+    int goalRow, goalCol;
+    cout << "Enter Goal (row and col) : ";
+    cin >> goalRow >> goalCol;
+
+
+    cout << "\nDFS Path:\n";
+
+    if (goalRow < 0 || goalCol < 0
+        || goalRow >= n || goalCol >= m
+        || maze[goalRow][goalCol] == 1)
+    {
+        cout << "No Path";
+        return 0;
     }
 
     vector<vector<bool>> visited(n, vector<bool>(m, false));
-    vector<pair<int,int>> path;
+    vector<pair<int, int>> path;
 
-    cout << endl << "DFS Path from (0,0) to (" << n-1 << "," << m-1 << "):" << endl;
-
-    if (DFS(0, 0, Maze, visited, path)) {
-        for (auto& p : path)
-            cout << "(" << p.first << "," << p.second << ") ";
-        cout << endl;
-        cout << "Path length: " << path.size() << endl;
-    } else {
-        cout << "No Path Found!" << endl;
+    if (DFS(0, 0, maze, visited, path, goalRow, goalCol))
+    {
+        for (int i = 0; i < path.size(); i++)
+            cout << "(" << path[i].first << "," << path[i].second << ") ";
+    }
+    else
+    {
+        cout << "No Path";
     }
 
+    cout << endl;
     return 0;
 }
+ 

@@ -13,28 +13,30 @@ bool DLS(int r, int c,
     const vector<vector<int>>& maze,
     vector<vector<bool>>& visited,
     vector<pair<int, int>>& path,
-    int limit, int goalRow, int goalCol)
+    int goalRow,int goalCol,int limit)
 {
     int n = maze.size();
     int m = maze[0].size();
 
-    if (r < 0 || c < 0 || r >= n || c >= m)
+    if (r < 0 || c < 0 || r >= n || c >= m) 
         return false;
+
     if (maze[r][c] == 1 || visited[r][c]) 
         return false;
 
-    if (limit < 0) 
+    if (limit < 0)
         return false;
 
     visited[r][c] = true;
-    path.push_back(make_pair(r, c));
+    path.push_back({r,c});
 
-    if (r == goalRow && c == goalCol) 
+    if (r == goalRow && c == goalCol)
         return true;
 
     for (int i = 0; i < 4; i++)
     {
-        if (DLS(r + dr[i], c + dc[i], maze, visited, path, limit - 1,goalRow,goalCol))
+        if (DLS(r + dr[i], c + dc[i], maze, visited,
+            path,goalRow,goalCol, limit - 1))
             return true;
     }
 
@@ -45,20 +47,44 @@ bool DLS(int r, int c,
 
 bool IDS(int startRow, int startCol,
     const vector<vector<int>>& maze,
-    vector<pair<int, int>>& path,
-    int goalRow,int goalCol)
+    vector<pair<int, int>>& path, int goalRow, int goalCol)
 {
     int n = maze.size();
     int m = maze[0].size();
-    long long maxDepth = n * m;
+    int maxDepth = n * m;
 
-    for (int depth = 0; depth <= maxDepth; depth++)
-    {
+
+    // Prove Montonic Funcation 
+    /*
+     > if depth = 10 is true then any depth greater than or equal 10 is true
+     > if depth = 9 is false then any depth less than or equal 10 is false
+    */
+
+    long long left = 1, right = 1ll * n * m, depth = -1;
+
+    while (left <= right) {
+        long long mid = (left + right) / 2;
         vector<vector<bool>> visited(n, vector<bool>(m, false));
         path.clear();
-        if (DLS(startRow, startCol, maze, visited, path, depth,goalRow,goalCol))
-            return true;
+        if (DLS(startRow, startCol, maze, visited,
+            path, goalRow, goalCol, mid)) {
+            right = mid - 1, depth = mid;
+        }
+        else {
+            left = mid + 1;
+        }
     }
+
+    if (depth == -1) {
+        return false;
+    }
+
+    vector<vector<bool>> visited(n, vector<bool>(m, false));
+    path.clear();
+    if (DLS(startRow, startCol, maze, visited,
+        path, goalRow, goalCol, depth))
+        return true;
+
 
     path.clear();
     return false;
@@ -80,13 +106,13 @@ int main()
     int goalRow, goalCol;
     cout << "Enter Goal (row and col) : ";
     cin >> goalRow >> goalCol;
-
+     
 
     vector<pair<int, int>> path;
 
     cout << "\nIDS Path:\n";
 
-
+ 
     if (goalRow < 0 || goalCol < 0
         || goalRow >= n || goalCol >= m
         || maze[goalRow][goalCol] == 1
@@ -97,7 +123,8 @@ int main()
     }
 
 
-    if (IDS(0, 0, maze, path, goalRow, goalCol))
+
+    if (IDS(0, 0, maze, path,goalRow,goalCol))
     {
         for (int i = 0; i < path.size(); i++)
             cout << "(" << path[i].first << "," << path[i].second << ") ";
@@ -110,3 +137,4 @@ int main()
     cout << endl;
     return 0;
 }
+ 
